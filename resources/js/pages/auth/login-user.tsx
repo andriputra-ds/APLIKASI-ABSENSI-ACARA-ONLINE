@@ -4,14 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent} from '@/components/ui/card';
 
 interface LoginProps {
     canResetPassword: boolean;
     status?: string;
 }
 
-export default function LoginAdmin({ canResetPassword, status }: LoginProps) {
+export default function Login({ canResetPassword, status }: LoginProps) {
     const { data, setData, post, processing, errors, reset } = useForm({
         username: '',
         password: '',

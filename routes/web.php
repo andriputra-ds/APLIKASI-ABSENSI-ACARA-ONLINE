@@ -15,6 +15,7 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
 // Protected Routes - perlu login admin
 Route::middleware(['auth:admin'])->prefix('admin')->group(function () {

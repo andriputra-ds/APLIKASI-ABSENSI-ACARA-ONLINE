@@ -27,6 +27,28 @@ class AuthController extends Controller
     }
 
     /**
+     * Proses registrasi user
+     */
+    public function register(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|unique:users,username',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = \App\Models\User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        Auth::login($user);
+
+        return redirect('/dashboard');
+    }
+
+    /**
      * Proses login admin
      */
     public function login(Request $request)
