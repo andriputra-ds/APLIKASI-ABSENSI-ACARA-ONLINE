@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class acara extends Model
+class Acara extends Model
 {
     protected $table = 'acara';
     protected $primaryKey = 'id_acara';
