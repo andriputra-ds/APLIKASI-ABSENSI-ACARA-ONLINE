@@ -17,18 +17,16 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
-// Protected Routes - perlu login admin
 Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('dashboard', [
-            'user' => auth('admin')->user(),
-            'stats' => [
-                'total_events' => \App\Models\Acara::count(),
-                'total_participants' => \App\Models\Peserta::count(),
-                'total_attendance' => \App\Models\Absensi::count(),
-            ]
-        ]);
+        return Inertia::render('admin/dashboard');
     })->name('admin.dashboard');
+});
+
+Route::middleware(['auth:PengelolaAcara'])->prefix('pengelola')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('pengelola/dashboard');
+    })->name('pengelola.dashboard');
 });
 
 require __DIR__.'/settings.php';

@@ -21,7 +21,7 @@ export default function Login({ canResetPassword, status }: LoginProps) {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('admin.login'), {
+        post(route('user.login'), {
             onFinish: () => reset('password'),
         });
     };
@@ -29,7 +29,7 @@ export default function Login({ canResetPassword, status }: LoginProps) {
     return (
         <>
             <Head title="Login - MyAbsence" />
-
+        
             <div className="min-h-screen flex border-t border-gray-200 bg-gray-50">
                 {/* bagian kiri - Login Form */}
                 <div

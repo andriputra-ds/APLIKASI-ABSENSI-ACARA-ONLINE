@@ -15,7 +15,7 @@ export default function Register() {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('register'), {
+        post(route('register.submit'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
@@ -24,11 +24,35 @@ export default function Register() {
         <>
             <Head title="Register - MyAbsence" />
             <div className="min-h-screen flex bg-gray-50">
-                {/* Kiri: Ilustrasi */}
+                {/* bagian kiri gambar */}
                 <div className="hidden lg:flex flex-1 items-center justify-center p-8 bg-white/20 backdrop-blur-xl border-r border-white/30">
-                    <img src="/register.png" alt="Register Illustration" className="max-w-md w-full" />
+                    <div className="text-center">
+                        <img src="/register.png" alt="Register Illustration" className="max-w-md w-full mb-8 animate-fade-in" />
+                        <h2 className="text-2xl font-bold text-gray-800 mb-4">Bergabunglah Sekarang!</h2>
+                        <p className="text-gray-700 text-base mb-8">Nikmati kemudahan absensi digital bersama MyAbsence.</p>
+                        <div className="flex flex-col items-center space-y-3 mt-8">
+                            <a
+                                href={route('login')}
+                                className="flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-yellow-400 font-semibold shadow-lg hover:from-black hover:via-gray-900 hover:to-black hover:scale-105 transition-all duration-200"
+                            >
+                                <svg className="w-5 h-5 mr-2 text-yellow-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                </svg>
+                                Sudah punya akun? <span className="underline ml-1">Masuk</span>
+                            </a>
+                            <a
+                                href="/forgot-password"
+                                className="flex items-center px-4 py-2 rounded-xl bg-white/80 text-gray-800 font-semibold shadow hover:bg-yellow-100 hover:text-yellow-700 hover:scale-105 transition-all duration-200"
+                            >
+                                <svg className="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 17v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-4a4 4 0 00-4 4v2a4 4 0 008 0v-2a4 4 0 00-4-4z" />
+                                </svg>
+                                Lupa password?
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                {/* Kanan: Form Register */}
+                {/* bagian kanan: Form Register */}
                 <div
                     className="flex-1 flex items-center justify-center p-8 min-h-screen"
                     style={{
