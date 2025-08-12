@@ -257,14 +257,12 @@ export default function AcaraPage({ user, events }: AcaraProps) {
     <h3 className="text-2xl font-bold text-gray-900">Daftar Acara</h3>
     <p className="text-gray-600 mt-1">Kelola semua acara yang telah dibuat</p>
   </div>
-  <Button 
+  <Link
+  href={route('pengelola.acara.create')}
     className="bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 font-semibold py-3 px-6 rounded-2xl shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl"
   >
-    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
-    </svg>
-    Tambah Acara
-  </Button>
+    Tambah Acara +
+  </Link>
 </div>
 
                             {/* acara */}

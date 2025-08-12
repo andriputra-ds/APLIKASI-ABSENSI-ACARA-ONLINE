@@ -30,6 +30,9 @@ Route::middleware(['auth:PengelolaAcara'])->prefix('pengelola')->group(function 
     Route::get('/acara', function () {
         return Inertia::render('pengelola/acara');
     })->name('pengelola.acara');
+    Route::get('/acara/create', function () {
+        return Inertia::render('pengelola/createAcara');
+    })->name('pengelola.acara.create');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])

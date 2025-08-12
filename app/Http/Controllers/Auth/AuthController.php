@@ -71,12 +71,12 @@ class AuthController extends Controller
         if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
             
-            return redirect()->intended('/admin/dashboard');
+            return redirect('/admin/dashboard');
         }
         if (Auth::guard('PengelolaAcara')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
             
-            return redirect()->intended('/pengelola/dashboard');
+            return redirect('/pengelola/dashboard');
         }
 
         throw ValidationException::withMessages([
