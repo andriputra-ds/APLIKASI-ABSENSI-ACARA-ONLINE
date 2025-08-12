@@ -27,7 +27,14 @@ Route::middleware(['auth:PengelolaAcara'])->prefix('pengelola')->group(function 
     Route::get('/dashboard', function () {
         return Inertia::render('pengelola/dashboard');
     })->name('pengelola.dashboard');
+    Route::get('/acara', function () {
+        return Inertia::render('pengelola/acara');
+    })->name('pengelola.acara');
 });
+
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->middleware('auth')
+    ->name('logout');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
