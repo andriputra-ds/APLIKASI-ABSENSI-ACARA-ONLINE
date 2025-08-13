@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Head, Link, router } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface AcaraProps {
     user?: {
@@ -20,6 +20,22 @@ interface AcaraProps {
 export default function AcaraPage({ user, events }: AcaraProps) {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [activeMenu, setActiveMenu] = useState('events');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [form, setForm] = useState({
+        title: '',
+        date: '',
+        time: '',
+        location: '',
+        description: '',
+      });
+       const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+          setForm({ ...form, [e.target.name]: e.target.value });
+        };
+      
+        const handleSubmit = (e: React.FormEvent) => {
+          e.preventDefault();
+          // Submit logic here
+        };
 
  const handleLogout = () => {
         if (confirm('Apakah Anda yakin ingin logout?')) {
@@ -257,12 +273,12 @@ export default function AcaraPage({ user, events }: AcaraProps) {
     <h3 className="text-2xl font-bold text-gray-900">Daftar Acara</h3>
     <p className="text-gray-600 mt-1">Kelola semua acara yang telah dibuat</p>
   </div>
-  <Link
-  href={route('pengelola.acara.create')}
-    className="bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 font-semibold py-3 px-6 rounded-2xl shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl"
-  >
-    Tambah Acara +
-  </Link>
+<Button
+  onClick={() => setIsModalOpen(true)}
+  className="bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 font-semibold py-3 px-6 rounded-2xl shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl"
+>
+  Tambah Acara +
+</Button>
 </div>
 
                             {/* acara */}
@@ -499,7 +515,90 @@ export default function AcaraPage({ user, events }: AcaraProps) {
                     </div>
                 </div>
 
-                {/* Mobile Sidebar Overlay */}
+                {/* Modal Create Acara */}
+                {isModalOpen && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+    <div className="bg-white rounded-2xl p-8 w-full max-w-xl shadow-xl">
+      <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">Nama Acara</label>
+              <input
+                type="text"
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-yellow-300 focus:outline-none bg-white/80"
+                placeholder="Contoh: Seminar Teknologi"
+                required
+              />
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <label className="block text-gray-700 font-medium mb-1">Tanggal</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={form.date}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-yellow-300 focus:outline-none bg-white/80"
+                  required
+                />
+              </div>
+              <div className="flex-1">
+                <label className="block text-gray-700 font-medium mb-1">Waktu</label>
+                <input
+                  type="time"
+                  name="time"
+                  value={form.time}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-yellow-300 focus:outline-none bg-white/80"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">Lokasi</label>
+              <input
+                type="text"
+                name="location"
+                value={form.location}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-yellow-300 focus:outline-none bg-white/80"
+                placeholder="Contoh: Aula Kampus"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">Deskripsi</label>
+              <textarea
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-yellow-300 focus:outline-none bg-white/80"
+                placeholder="Deskripsi singkat acara"
+                rows={3}
+              />
+            </div>
+            <div className="flex justify-between items-center gap-3 mt-4">
+              <Button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="bg-gray-900 text-white font-semibold py-3 px-8 rounded-2xl shadow hover:bg-gray-300 transition-all"
+              >
+                Tutup
+              </Button>
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 font-semibold py-3 px-8 rounded-2xl shadow-lg hover:scale-105 transition-all"
+              >
+                Simpan Acara
+              </Button>
+            </div>
+          </form>
+    </div>
+  </div>
+)}
+
                 {sidebarOpen && (
                     <div 
                         className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
